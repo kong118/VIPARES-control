@@ -1,6 +1,6 @@
-#＃＃ VIPARES-control
+#VIPARES-control
 VIPARES control team
 ---
-＃＃Minimizing Jerk in Longitudinal Speed Control : PID vs. MPC
+##Minimizing Jerk in Longitudinal Speed Control : PID vs. MPC
 ---
-＃Objectives
+###Objectives
