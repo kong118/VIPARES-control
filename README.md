@@ -28,7 +28,7 @@
 - MPC  
   need to build: mpc.py  
   
-  what is PID:  
+  what is MPC:  
   https://engineering.purdue.edu/~zak/Second_ed/MPC_handout.pdf
 
 
