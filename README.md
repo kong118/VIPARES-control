@@ -20,17 +20,15 @@
 - jerk.py
 
 ### Step 2: create a controller
-- PID
-  ---
-  need to build: pid.py
-  ---
-  what is PID:
+- PID  
+  need to build: pid.py  
+  
+  what is PID:  
   https://www.ni.com/en/shop/labview/pid-theory-explained.html?srsltid=AfmBOor1eDSsFWreYQ3kElTcZXPkYeczanxj3OX8jKJXzBTlYpqStuDt
-- MPC
-  ---
-  need to build: mpc.py
-  ---
-  what is PID:
+- MPC  
+  need to build: mpc.py  
+  
+  what is PID:  
   https://engineering.purdue.edu/~zak/Second_ed/MPC_handout.pdf
 
 
