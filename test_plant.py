@@ -51,11 +51,11 @@ def run_plant2nd_racecar():
     t = np.arange(N) * Ts
     v = np.zeros(N); u_hist = np.zeros(N)
 
-    # 油門：先 S-curve 1 秒（減少 jerk），再維持 u_ss
+    
     def throttle_profile(k):
         trise = int(1.0 / Ts)
         x = min(1.0, k / trise)
-        s = x*x*(3 - 2*x)  # smoothstep
+        s = x*x*(3 - 2*x) 
         return u_ss * s
 
     for k in range(N):
