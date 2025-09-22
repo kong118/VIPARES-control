@@ -16,7 +16,6 @@
 ---
 ### Step 1: Create a plant model
 - plant.py
-- plant.m
 - jerk.py
 
 ### Step 2: create a controller
