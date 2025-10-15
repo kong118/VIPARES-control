@@ -1,8 +1,13 @@
 class Plant1st:
     def __init__(self, tau=0.4, k=3.0, Ts=0.02, umin=0.0, umax=1.0, du_max=0.05):
-        self.Ts, self.tau, self.k = Ts, tau, k
-        self.umin, self.umax, self.du_max = umin, umax, du_max
-        self.v = 0.0; self.u_prev = 0.0
+        self.Ts = Ts # Sample time
+        self.tau = tau # System time constant
+        self.k = k # System gain
+        self.umin = umin # <- Actuator saturation
+        self.umax = umax # <-/ 
+        self.du_max = du_max # Max rate of change
+        self.v = 0.0 # Current plant output (speed)
+        self.u_prev = 0.0 # Last applied control input
         self._update_ab()
     def _update_ab(self):
         import math

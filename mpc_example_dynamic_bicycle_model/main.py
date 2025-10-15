@@ -58,8 +58,10 @@ estimator = do_mpc.estimator.StateFeedback(model)
 X_p_0 = 0  # Initial x position [m]
 Y_P_0 = 0  # Initial y position [m]
 Psi_0 = 0  # Intial yaw angle [rad]
-V  = 0.1  # Initial velocity x-axis [m/s]
-x0 = np.array([X_p_0, Y_P_0, Psi_0, V]).reshape(-1, 1)
+V_x_0 = 0.1  # Initial velocity x-axis [m/s]
+V_y_0 = 0  # Initial velocity y_axis [m/s]
+W_0 = 0  # Initial yaw rate [rad/s]
+x0 = np.array([X_p_0, Y_P_0, Psi_0, V_x_0, V_y_0, W_0]).reshape(-1, 1)
 
 # pushing initial condition to mpc and the simulator
 mpc.x0 = x0
@@ -73,38 +75,17 @@ timer = Timer()
 optimal_control = []
 optimal_states = []
 optimal_states.append(x0)
-for k in range(200):
-
-    # for the current state x0, mpc computes the optimal control action u0
+for k in range(100):
     timer.tic()
     u0 = mpc.make_step(x0)
     timer.toc()
-
-    # for the current state u0, computes the next state y_next
     y_next = simulator.make_step(u0)
-
-    # for the current state y_next, estimates the next state x0
-    x0 = estimator.make_step(y_next)
-
-    # storage
+    x0 = y_next#estimator.make_step(y_next)
     optimal_control.append(u0)
     optimal_states.append(x0)
 
-# make plots
-optimal_control = np.array(optimal_control)
-plt.plot(optimal_control[:, 0], label='Delta')
-plt.plot(optimal_control[:, 1], label='Acc')
-plt.legend()
-plt.show()
-
-optimal_states = np.array(optimal_states)
-plt.plot(optimal_states[:, 0], label='X_p')
-plt.plot(optimal_states[:, 1], label='Y_p')
-plt.plot(optimal_states[:, 2], label='Psi')
-plt.plot(optimal_states[:, 3], label='V')
-
-plt.legend()
-plt.show()
-
-plt.plot(optimal_states[:, 0], optimal_states[:, 1])
+# make plot
+fig, ax, graphics = do_mpc.graphics.default_plot(simulator.data, figsize=(16,9))
+graphics.plot_results()
+graphics.reset_axes()
 plt.show()
