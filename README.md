@@ -13,6 +13,10 @@
   ```terminal
   python -m pip install -r requirements.txt
   ```  
+---
+### MPC Examples
+- [do-mpc Example] (https://github.com/do-mpc/do-mpc)
+- [New MPC Example] (https://github.com/AtsushiSakai/PythonRobotics)
   what is MPC:  
   https://engineering.purdue.edu/~zak/Second_ed/MPC_handout.pdf
 
