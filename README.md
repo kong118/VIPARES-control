@@ -15,8 +15,11 @@
   ```  
 ---
 ### MPC Examples
-- [do-mpc Example] (https://github.com/do-mpc/do-mpc)
-- [New MPC Example] (https://github.com/AtsushiSakai/PythonRobotics)
+[do-mpc Example](https://github.com/do-mpc/do-mpc)  
+[New MPC Example](https://github.com/AtsushiSakai/PythonRobotics)  
+
+---
+### Resources
   what is MPC:  
   https://engineering.purdue.edu/~zak/Second_ed/MPC_handout.pdf
 
