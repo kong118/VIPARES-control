@@ -85,7 +85,7 @@ for k in range(100):
     optimal_states.append(x0)
 
 # make plot
-fig, ax, graphics = do_mpc.graphics.default_plot(simulator.data, figsize=(16,9))
+fig, ax, graphics = do_mpc.graphics.default_plot(simulator.data, figsize=(9,6))
 graphics.plot_results()
 graphics.reset_axes()
 plt.show()
