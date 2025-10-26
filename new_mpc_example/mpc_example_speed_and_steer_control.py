@@ -35,7 +35,8 @@ MAX_TIME = 500.0  # max simulation time
 MAX_ITER = 3  # Max iteration
 DU_TH = 0.1  # iteration finish param
 
-TARGET_SPEED = 10.0 / 3.6  # [m/s] target speed
+#TARGET_SPEED = 10.0 / 3.6  # [m/s] target speed
+TARGET_SPEED = 8.9408 # 20 mph in m/s
 N_IND_SEARCH = 10  # Search index number
 
 DT = 0.2  # [s] time tick
@@ -51,9 +52,13 @@ WB = 2.5  # [m]
 
 MAX_STEER = np.deg2rad(45.0)  # maximum steering angle [rad]
 MAX_DSTEER = np.deg2rad(30.0)  # maximum steering speed [rad/s]
-MAX_SPEED = 55.0 / 3.6  # maximum speed [m/s]
-MIN_SPEED = -20.0 / 3.6  # minimum speed [m/s]
-MAX_ACCEL = 1.0  # maximum accel [m/ss]
+
+#MAX_SPEED = 55.0 / 3.6  # maximum speed [m/s]
+#MIN_SPEED = -20.0 / 3.6  # minimum speed [m/s]
+#MAX_ACCEL = 1.0  # maximum accel [m/ss]
+MAX_SPEED = 58.1152 # Calculated from top speed for Ford Fusion [m/s]
+MIN_SPEED = -20.0  # minimum speed [m/s]
+MAX_ACCEL = 5.26 # Calculated from 0 - 60 time for Ford Fusion (5.1 sec) [m/s]
 
 show_animation = True
 
@@ -489,6 +494,8 @@ def smooth_yaw(yaw):
     return yaw
 
 
+################################ PATH GENERATION ################################
+
 def get_straight_course(dl):
     ax = [0.0, 5.0, 10.0, 20.0, 30.0, 40.0, 50.0]
     ay = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
@@ -528,15 +535,17 @@ def get_forward_course(dl):
 
 
 def get_switch_back_course(dl):
-    ax = [0.0, 30.0, 6.0, 20.0, 35.0]
-    ay = [0.0, 0.0, 20.0, 35.0, 20.0]
+    # List of points for spline path
+    ax = [0.0, 30.0, 6.0, 20.0, 35.0] # X coordinates for points
+    ay = [0.0, 0.0, 20.0, 35.0, 20.0] # Y coordinates for points
     cx, cy, cyaw, ck, s = cubic_spline_planner.calc_spline_course(
         ax, ay, ds=dl)
+    # List of points for new spline path
     ax = [35.0, 10.0, 0.0, 0.0]
     ay = [20.0, 30.0, 5.0, 0.0]
     cx2, cy2, cyaw2, ck2, s2 = cubic_spline_planner.calc_spline_course(
         ax, ay, ds=dl)
-    cyaw2 = [i - math.pi for i in cyaw2]
+    cyaw2 = [i - math.pi for i in cyaw2] # Have car go backwards on second spline
     cx.extend(cx2)
     cy.extend(cy2)
     cyaw.extend(cyaw2)
@@ -552,9 +561,9 @@ def main():
     dl = 1.0  # course tick
     # cx, cy, cyaw, ck = get_straight_course(dl)
     # cx, cy, cyaw, ck = get_straight_course2(dl)
-    # cx, cy, cyaw, ck = get_straight_course3(dl)
+    cx, cy, cyaw, ck = get_straight_course3(dl)
     # cx, cy, cyaw, ck = get_forward_course(dl)
-    cx, cy, cyaw, ck = get_switch_back_course(dl)
+    # cx, cy, cyaw, ck = get_switch_back_course(dl)
 
     sp = calc_speed_profile(cx, cy, cyaw, TARGET_SPEED)
 

@@ -377,15 +377,15 @@ class CubicSpline2D:
 
 def calc_spline_course(x, y, ds=0.1):
     sp = CubicSpline2D(x, y)
-    s = list(np.arange(0, sp.s[-1], ds))
+    s = list(np.arange(0, sp.s[-1], ds)) # s is list of distances from start point?
 
     rx, ry, ryaw, rk = [], [], [], []
     for i_s in s:
-        ix, iy = sp.calc_position(i_s)
+        ix, iy = sp.calc_position(i_s) # get x,y position at distance i_s from start point
         rx.append(ix)
         ry.append(iy)
-        ryaw.append(sp.calc_yaw(i_s))
-        rk.append(sp.calc_curvature(i_s))
+        ryaw.append(sp.calc_yaw(i_s)) # get yaw angle (tangent vector) at distance i_s
+        rk.append(sp.calc_curvature(i_s)) # get curvature at distance i_s
 
     return rx, ry, ryaw, rk, s
 

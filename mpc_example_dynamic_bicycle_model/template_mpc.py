@@ -57,7 +57,7 @@ def template_mpc(model, silence_solver=False):
 
     # setting up the cost function
     # Y axis desired position
-    set_point = 1
+    set_point = 5
     mterm =(model.x['Y_p'] - set_point) ** 2
     lterm = (model.x['Y_p'] - set_point) ** 2
     mpc.set_objective(mterm=mterm, lterm=lterm)
